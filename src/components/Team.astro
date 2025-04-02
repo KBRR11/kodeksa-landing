@@ -1,0 +1,131 @@
+---
+import TeamMemberCard from './TeamMemberCard.astro';
+
+const team = [
+  {
+    name: 'Keny Ramírez',
+    role: 'Senior Full-stack Developer',
+    image: '/images/team/keny-ramirez.png',
+    imageSize:90,
+    slug: 'keny-ramirez',
+    bgColor:'#eae7dc',
+    textAbove: 'FULL    STACK',
+    aboveFontSize: '3.5rem',
+    textAboveColor: '#096551',
+    aboveLetterSpacing:'0.23em',
+    aboveFontFamily:"'Clash Display', sans-serif",
+    textBelow: 'DEVELOPER',
+    belowFontFamily:"'Clash Display', sans-serif",
+    textBelowColor: '#ccdbaa',
+    stack: ['Flutter', 'Angular', 'Node.js', 'FastApi', 'Flask', 'Java']
+  },
+  {
+    name: 'Ricardo Badtke',
+    role: 'Asuntos legales',
+    image: '/images/team/ricardo-badtke.png',
+    imageSize:105,
+    imageLeftOffset:'14%',
+    slug: 'ricardo-badtke',
+    bgColor:'#7facbe ',
+    textAbove: 'Lawyer',
+    textAboveColor:'#add693',
+    textBelow: 'caso cerrado',
+    textBelowColor: '#b3edb2',
+    stack: ['Figma', 'Adobe XD', 'Webflow']
+  },
+  {
+    name: 'Estefany Garcia',
+    role: 'Frontend Developer',
+    image: '/images/team/estefany-garcia.png',
+    imageSize:103,
+    imageLeftOffset:'-14%',
+    slug: 'estefany-garcia',
+    bgColor: '#dab575',
+    textAbove: 'Front<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end',
+    textAboveColor:'#264653',
+    aboveFontSize: '3.2rem',
+    textBelow: 'Developer',
+    textBelowColor:'#e9e4c9',
+    stack: ['Angular', 'Next.js', 'Astro']
+  },
+  {
+    name: 'Sofía Ferrazano',
+    role: 'QA Automation Engineer',
+    image: '/images/team/sofia-ferrazano.png',
+    imageSize:95,
+    slug: 'sofia-ferrazano',
+    bgColor: '#c34c3c',
+    textAbove: 'QA',
+    aboveFontFamily:"'Clash Display', sans-serif",
+    textAboveColor: '#8a1b1b',
+    aboveFontSize: '13.0rem',
+    aboveLetterSpacing:'0.0em',
+    aboveTextTopOffset:"-5rem",
+    textBelow: 'Automation',
+    textBelowColor:'#fcbebe',
+    // stack: ['Node.js', 'Python', 'PostgreSQL']
+    stack: []
+  },
+];
+---
+
+<section id="profesionales" class="py-32 bg-kodeksa-dark/[0.02]">
+  <div class="container mx-auto px-6">
+    <div class="max-w-2xl mx-auto text-center mb-16">
+      <h2 class="text-4xl font-display font-bold text-kodeksa-dark mb-6">Nuestro Equipo</h2>
+      <p class="text-kodeksa-dark/70 text-lg">
+        Conocé a los profesionales que hacen posible transformar ideas en realidad.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {team.map((member, index) => {
+        // Asignar diferentes colores de fondo a cada miembro
+        const bgColors = ["#E8F4F2", "#FFF8E6", "#F0F0F0", "#E6F1FF"];
+        const textColors = ["#1A4D2E", "#D04848", "#264653", "#444444"];
+        
+        return (
+          <a href={`/engineers/${member.slug}`} class="group">
+            <TeamMemberCard
+              image={member.image}
+              altText={member.name}
+              text_above={member.textAbove}
+              text_below={member.textBelow}
+              bgColor={member.bgColor??bgColors[index % bgColors.length]}
+              textAboveColor={member.textAboveColor??textColors[index % textColors.length]}
+              textBelowColor={member.textBelowColor??textColors[index % textColors.length]}
+              imageSize={member.imageSize??90}
+              imageLeftOffset={member.imageLeftOffset??"0"}
+              aboveFontFamily={member.aboveFontFamily??"'Clash Display', sans-serif"}
+              belowFontFamily={member.belowFontFamily??"'JetBrains Mono', sans-serif"}
+              aboveFontSize={member.aboveFontSize??"3.5rem"}
+              belowFontSize="1.5rem"
+              aboveFontWeight="700"
+              belowFontWeight="700"
+              aboveLetterSpacing={member.aboveLetterSpacing??"0.23em"}
+              belowLetterSpacing="0.35em"
+              aboveTextTransform="uppercase"
+              belowTextTransform="uppercase"
+              aboveTextTopOffset={member.aboveTextTopOffset??"0"}
+            />
+            <div class="space-y-4">
+              <div>
+                <h3 class="text-xl font-bold text-kodeksa-dark group-hover:text-kodeksa-primary transition-colors">
+                  {member.name}
+                </h3>
+                <p class="text-kodeksa-dark/70">{member.role}</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                {member.stack.map(tech => (
+                  <span class="px-3 py-1 bg-kodeksa-dark/5 text-kodeksa-dark/70 rounded-full text-sm">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>
